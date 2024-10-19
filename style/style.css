@@ -1,14 +1,21 @@
 @font-face {
-    font-family: lego;
-    src: url(../font/LEGO.ttf);
+    font-family: 'Headline';
+    src: url(../font/sofachrome\ rg.otf);
 }
 
 body{
-    font-family: lego;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     background-color: #f0f0f0;
-    font-size: 3rem;
+    font-size: 2.5rem;
     text-align: center;
     user-select: none;
+}
+
+h1{
+    font-family: 'Headline';
+    font-size: 4rem;
+    color: #000;
+    margin-top: 5%;
 }
 
 
@@ -21,9 +28,8 @@ body{
 #field7,
 #field8,
 #field9{
-    width: 200px;
-    height: 200px;
-    
+    width: 160px;
+    height: 160px;
     border: 1px solid #000;
     cursor: pointer;
     margin-top: 20%;
@@ -34,8 +40,65 @@ body{
 
 #gameField {
     width: 50%;
+    margin-right: auto;
+    margin-left: auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 
     
+}
+
+#player1Score,
+#player2Score,
+#divPlayerOne,
+#divPlayerTwo{
+    font-size: 2.6rem;
+    
+
+}
+
+#player1Score,
+#player2Score{
+    display: inline-block;
+
+}
+
+#divPlayerOne {
+    background-color: #0000005e;
+    width: 25%;
+    position: absolute;
+    top: 19%;
+    text-align: start;
+    left: 0;
+    margin-left: 2%;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#divPlayerTwo {
+    background-color: #0000005e;
+    width: 25%;
+    position: absolute;
+    top: 19%;
+    text-align: start;
+    right: 0;
+    margin-right: 2%;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+#gameTie {
+    display: none;
+    font-size: 7rem;
+    position: absolute;
+    top: 49%;
+    left: 0;
+    right: 0;
+    background-color: #0000005e;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1%;
+    border-radius: 15px;
+
 }

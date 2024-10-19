@@ -28,10 +28,10 @@ function game(fieldPlayer, row, col) {
         } else {
             fieldPlayer.style.backgroundColor = player2.color;
             gameMatrix[row][col] = player2.weight;
-        } 
+        }
         turn++;
     }
-    
+
     setTimeout(() => {
         checkWinner();
     }, 100);
@@ -59,28 +59,38 @@ function checkWinner() {
 
     if (gameMatrix[0][0] === gameMatrix[1][1] && gameMatrix[1][1] === gameMatrix[2][2] && gameMatrix[0][0] !== -1) {
         winner = gameMatrix[0][0];
-    } else if(gameMatrix[0][2] === gameMatrix[1][1] && gameMatrix[1][1] === gameMatrix[2][0] && gameMatrix[0][2] !== -1) {
+    } else if (gameMatrix[0][2] === gameMatrix[1][1] && gameMatrix[1][1] === gameMatrix[2][0] && gameMatrix[0][2] !== -1) {
         winner = gameMatrix[0][2];
     }
+
+    // Check Winner
 
     if (winner !== -1) {
         if (winner === player1.weight) {
             player1.score++;
             document.getElementById("player1Score").innerHTML = player1.score;
-            alert(player1.name + " wins!");
+            console.log(player1.name + " wins!");
 
             resetGame();
-        } else {
+        } else if (winner === player2.weight) {
             player2.score++;
             document.getElementById("player2Score").innerHTML = player2.score;
-            alert(player2.name + " wins!");
+            console.log(player2.name + " wins!");
 
             resetGame();
         }
-        
+    }
+
+    if (turn === 9 && winner === -1) {
+        console.log("It's a tie!");
+        resetGame();
+        document.getElementById("gameTie").style.display = "block";
+
+        setTimeout(() => {
+            document.getElementById("gameTie").style.display = "none";
+        }, 2000);
     }
 }
-
 function resetGame() {
     turn = 0;
     gameMatrix = [
@@ -89,8 +99,7 @@ function resetGame() {
         [-1, -1, -1]
     ]
 
-    let field = document.getElementsByClassName("field");
     for (let i = 1; i < 10; i++) {
-       document.getElementById(eval(field + i)).style.backgroundColor = "white";
+        document.getElementById('field' + i).style.backgroundColor = "white";
     }
 }
