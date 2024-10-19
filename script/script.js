@@ -1,3 +1,5 @@
+let turn = 0;
+
 let player1 = {
     name: "Player 1",
     color: "black",
@@ -7,7 +9,7 @@ let player1 = {
 
 let player2 = {
     name: "Player 2",
-    color: "black",
+    color: "red",
     weight: 40,
     score: 0
 }
@@ -18,3 +20,77 @@ let gameMatrix = [
     [-1, -1, -1]
 ]
 
+function game(fieldPlayer, row, col) {
+    if (gameMatrix[row][col] === -1) {
+        if (turn % 2 === 0) {
+            fieldPlayer.style.backgroundColor = player1.color;
+            gameMatrix[row][col] = player1.weight;
+        } else {
+            fieldPlayer.style.backgroundColor = player2.color;
+            gameMatrix[row][col] = player2.weight;
+        } 
+        turn++;
+    }
+    
+    setTimeout(() => {
+        checkWinner();
+    }, 100);
+}
+
+function checkWinner() {
+    let winner = -1;
+
+    // Check rows
+    for (let i = 0; i < 3; i++) {
+        if (gameMatrix[i][0] === gameMatrix[i][1] && gameMatrix[i][1] === gameMatrix[i][2] && gameMatrix[i][0] !== -1) {
+            winner = gameMatrix[i][0];
+        }
+    }
+
+    // Check columns
+
+    for (let i = 0; i < 3; i++) {
+        if (gameMatrix[0][i] === gameMatrix[1][i] && gameMatrix[1][i] === gameMatrix[2][i] && gameMatrix[0][i] !== -1) {
+            winner = gameMatrix[0][i];
+        }
+    }
+
+    // Check diagonals
+
+    if (gameMatrix[0][0] === gameMatrix[1][1] && gameMatrix[1][1] === gameMatrix[2][2] && gameMatrix[0][0] !== -1) {
+        winner = gameMatrix[0][0];
+    } else if(gameMatrix[0][2] === gameMatrix[1][1] && gameMatrix[1][1] === gameMatrix[2][0] && gameMatrix[0][2] !== -1) {
+        winner = gameMatrix[0][2];
+    }
+
+    if (winner !== -1) {
+        if (winner === player1.weight) {
+            player1.score++;
+            document.getElementById("player1Score").innerHTML = player1.score;
+            alert(player1.name + " wins!");
+
+            resetGame();
+        } else {
+            player2.score++;
+            document.getElementById("player2Score").innerHTML = player2.score;
+            alert(player2.name + " wins!");
+
+            resetGame();
+        }
+        
+    }
+}
+
+function resetGame() {
+    turn = 0;
+    gameMatrix = [
+        [-1, -1, -1],
+        [-1, -1, -1],
+        [-1, -1, -1]
+    ]
+
+    let field = document.getElementsByClassName("field");
+    for (let i = 1; i < 10; i++) {
+       document.getElementById(eval(field + i)).style.backgroundColor = "white";
+    }
+}

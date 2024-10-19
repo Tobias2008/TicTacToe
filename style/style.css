@@ -1,0 +1,41 @@
+@font-face {
+    font-family: lego;
+    src: url(../font/LEGO.ttf);
+}
+
+body{
+    font-family: lego;
+    background-color: #f0f0f0;
+    font-size: 3rem;
+    text-align: center;
+    user-select: none;
+}
+
+
+#field1,
+#field2,
+#field3,
+#field4,
+#field5,
+#field6,
+#field7,
+#field8,
+#field9{
+    width: 200px;
+    height: 200px;
+    
+    border: 1px solid #000;
+    cursor: pointer;
+    margin-top: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#gameField {
+    width: 50%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    
+}
