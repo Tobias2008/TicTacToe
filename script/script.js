@@ -1,4 +1,15 @@
+//  Author:  Payreder Tobias
+//  Start-Date:  18/10/2024
+//  Last-Modified-Date:  20/10/2024
+
+
+// Tic Tac Toe game
+
+// Initialize variables
+
 let turn = 0;
+
+let runningGame = false;
 
 let player1 = {
     name: "Player 1",
@@ -20,6 +31,96 @@ let gameMatrix = [
     [-1, -1, -1]
 ]
 
+// Nav
+
+let myNav = document.getElementById('myNav');
+let myNavImg = document.getElementById('openNav');
+
+// Open Nav
+
+function openNav() {
+    myNav.style.left = "0%";
+    myNav.style.paddingRight = "2%";
+
+    myNavImg.style.position = "relative";
+    myNavImg.style.left = "-20%";
+    myNavImg.style.bottom = "0%";
+
+
+    document.getElementById('openNav').innerHTML = '<img src="./image/MenuIcon.png" id="navImage" onclick="closeNav()">'
+
+}
+
+// Close Nav
+
+function closeNav() {
+    myNav.style.left = "-16%";
+    myNav.style.paddingRight = "4%";
+
+    myNavImg.style.position = "relative";
+    myNavImg.style.left = "0%";
+    myNavImg.style.bottom = "0px";
+
+
+    document.getElementById('openNav').innerHTML = '<img src="./image/MenuIcon.png" id="navImage" onclick="openNav()">'
+
+    if (runningGame) {
+        closeNavWhileGameStart();
+    }
+}
+
+function closeNavWhileGameStart() {
+    myNav.style.paddingRight = "5.5%";
+    myNavImg.style.position = "relative";
+    myNavImg.style.left = "15%";
+    myNavImg.style.bottom = "0px";
+}
+
+
+
+// Start Game
+
+function startGame() {
+    document.getElementById('startGame').style.display = "block";
+    document.getElementById('gameField').style.display = "grid";
+    document.getElementById('divPlayerOne').style.display = "block";
+    document.getElementById('divPlayerTwo').style.display = "block";
+    document.getElementById('startEndButton').innerHTML = '<div id="startGameButton" onclick="endGame()"><p>End Game</p></div>';
+
+    runningGame = true;
+    closeNav();
+
+}
+
+
+// End Game
+
+function endGame() {
+
+for(let i = 1; i < 10; i++) {
+    document.getElementById('field' + i).style.backgroundColor = "white";
+}
+
+    console.log("Step1");
+    document.getElementById('startEndButton').innerHTML = '<div onclick="startGame()"><p>Start Game</p></div>';
+    document.getElementById('gameField').style.display = "none";
+    document.getElementById('startGame').style.display = "none";
+    document.getElementById('divPlayerOne').style.display = "none";
+    document.getElementById('divPlayerTwo').style.display = "none";
+
+    runningGame = false;
+    closeNav();
+
+    turn = 0;
+    gameMatrix = [
+        [-1, -1, -1],
+        [-1, -1, -1],
+        [-1, -1, -1]
+    ]
+}
+
+// Onclick event for each field - give each clicked field the player weight
+
 function game(fieldPlayer, row, col) {
     if (gameMatrix[row][col] === -1) {
         if (turn % 2 === 0) {
@@ -36,6 +137,8 @@ function game(fieldPlayer, row, col) {
         checkWinner();
     }, 100);
 }
+
+// check if someone wins
 
 function checkWinner() {
     let winner = -1;
@@ -63,7 +166,7 @@ function checkWinner() {
         winner = gameMatrix[0][2];
     }
 
-    // Check Winner
+    // final check
 
     if (winner !== -1) {
         if (winner === player1.weight) {
@@ -91,6 +194,9 @@ function checkWinner() {
         }, 2000);
     }
 }
+
+// reset game after win or tie
+
 function resetGame() {
     turn = 0;
     gameMatrix = [
@@ -99,7 +205,23 @@ function resetGame() {
         [-1, -1, -1]
     ]
 
+
+
     for (let i = 1; i < 10; i++) {
         document.getElementById('field' + i).style.backgroundColor = "white";
     }
+
+
+}
+
+// Store
+
+// open / close Store
+
+function openStore() {
+    document.getElementById('store').style.display = "block";
+}
+
+function closeStore() {
+    document.getElementById('store').style.display = "none";
 }
