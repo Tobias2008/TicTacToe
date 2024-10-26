@@ -3,22 +3,37 @@
     src: url(../font/sofachrome\ rg.otf);
 }
 
-body{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    background-color: #f0f0f0;
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
     font-size: 2.5rem;
     text-align: center;
     user-select: none;
+    background-image: url('../image/BackgroundOne.png');
+    background-color: rgb(0, 0, 0);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: rgb(255, 255, 255);
 }
 
-nav {
-    position:absolute;
-    background-color: red;
-    padding: 2%;
+/* Navigation */
 
+nav {
+    position: fixed;
+    background-color: #3122448a;
+    border-top: #5a189abb 4px solid;
+    border-right: #5a189abb 4px solid;
+    border-bottom: #5a189abb 4px solid;
+
+
+    padding: 2%;
     text-align: end;
     padding-right: 4%;
-    left: -16%;   
+    left: -16%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 #navImage {
@@ -30,21 +45,93 @@ nav {
     left: 26%;
 }
 
-nav div p{
+nav div p {
     cursor: pointer;
     margin-top: 0;
     margin-bottom: 0;
 }
 
+/* Navigation Animation */
 
 
-
-h1{
-    font-family: 'Headline';
-    font-size: 4rem;
-    color: #000;
-    margin-top: 5%;
+.animateNavOpen {
+    animation: navigationOpen 0.3s ease;
+    position: fixed;
 }
+
+@keyframes navigationOpen {
+    0% {
+        left: -16%;
+    }
+
+    100% {
+        left: 0;
+        padding-right: 4%;
+    }
+}
+
+.animateNavClose {
+    animation: navigationClose 0.3s ease;
+    position: fixed;
+}
+
+@keyframes navigationClose {
+    0% {
+        left: 0;
+        padding-right: 4%;
+    }
+
+    100% {
+        left: -16%;
+    }
+}
+
+.animateNavCloseWhileGame {
+    animation: navigationCloseWhileGame 0.3s ease;
+    position: fixed;
+}
+
+@keyframes navigationCloseWhileGame {
+    0% {
+        left: 0;
+        padding-right: 4%;
+    }
+
+    100% {
+        left: -14%;
+    }
+}
+
+.navLinks {
+    position: relative;
+    left: 2.5%
+}
+
+/* Style Headline and Text */
+
+h1,
+h2 {
+    margin-top: 3%;
+    font-family: 'Headline';
+    font-size: 3rem;
+    color: #ffffff;
+
+}
+
+h3 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 0;
+}
+
+h1,
+h2,
+h3,
+p {
+    text-shadow: 2px 2px 4px #000000;
+}
+
+/* Style Game */
 
 #startGame {
     display: none;
@@ -58,7 +145,7 @@ h1{
 #field6,
 #field7,
 #field8,
-#field9{
+#field9 {
     width: 160px;
     height: 160px;
     border: 1px solid #000;
@@ -77,47 +164,25 @@ h1{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 
-    
+
 }
 
 #player1Score,
 #player2Score,
 #divPlayerOne,
-#divPlayerTwo{
+#divPlayerTwo {
     font-size: 2.6rem;
-    
+
 
 }
 
 #player1Score,
-#player2Score{
+#player2Score {
     display: inline-block;
 
 }
 
-#divPlayerOne {
-    background-color: #0000005e;
-    width: 25%;
-    position: absolute;
-    top: 19%;
-    text-align: start;
-    left: 0;
-    margin-left: 2%;
-    border-radius: 15px;
-    padding: 10px;
-}
 
-#divPlayerTwo {
-    background-color: #0000005e;
-    width: 25%;
-    position: absolute;
-    top: 19%;
-    text-align: start;
-    right: 0;
-    margin-right: 2%;
-    border-radius: 15px;
-    padding: 10px;
-}
 
 #gameTie {
     display: none;
@@ -133,4 +198,113 @@ h1{
     padding: 1%;
     border-radius: 15px;
 
+}
+
+/* Style Store */
+
+#store {
+    display: none;
+}
+
+
+
+#websiteExplText {
+    font-size: 2rem;
+    margin-top: 2%;
+    text-align: justify;
+    margin-right: 20%;
+    margin-left: 20%;
+
+}
+
+#mark {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#score {
+    position: absolute;
+    right: 1%;
+    top: 25%;
+    text-align: end;
+
+    background-color: #00000036;
+    padding: 1%;
+    border-radius: 15px;
+}
+
+
+#choosePlayerStore {
+    width: 40%;
+    text-align: center;
+    font-size: 2.5rem;
+    border-radius: 15px;
+}
+
+select {
+    font-size: 2rem;
+    border-radius: 15px;
+    padding: 1%;
+    margin-top: 2%;
+    background-color: #000000b9;
+    color: white;
+    font-weight: bolder;
+    border: black 3px solid;
+    user-select: none;
+    cursor: pointer;
+}
+
+option {
+    font-size: 2rem;
+    background-color: #00000011;
+    color: white;
+    font-weight: bolder;
+    border: black 3px solid;
+    user-select: none;
+    cursor: pointer;
+}
+
+#StandardItems,
+#ItemsPlayerOne,
+#ItemsPlayerTwo {
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1%;
+}
+
+
+
+
+
+/*
+#item1:hover,
+#item2:hover,
+#item3:hover,
+#item4:hover,
+#item5:hover,
+#item6:hover,
+#item7:hover,
+#item8:hover,   
+#item9:hover {
+    background-color: rgb(48, 48, 48);
+    border: 6px solid #000000;
+    padding: 5%;
+    border-radius: 15px;
+    cursor: pointer;
+    transform: scale(1.1);
+    color: white;
+}
+*/
+
+
+/*#WebsideExplaination {
+    display: none;
+}
+
+#headline {
+    display: none;
+}
+
+#myNav {
+    display: none;
 }

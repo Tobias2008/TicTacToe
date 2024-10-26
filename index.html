@@ -7,32 +7,61 @@
     <title>Tic Tac Toe</title>
     <script src="./script/script.js" defer></script>
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="icon" href="./image/Icon.png">
 </head>
 
 <body>
-    <h1>The real Tic Tac Toe</h1>
+
+    <!-- Start Website 
+
+<div id="startWebsite"><img src="./image/animations/pure-css-planet-loader-animation-ezgif.com-gif-maker.gif" alt=""></div>
+-->
+    <h1 id="headline">The real Tic Tac Toe</h1>
+
+    <!-- Nav -->
 
     <nav id="myNav">
-        <div id="openNav"><img src="./image/MenuIcon.png" id="navImage" onclick="openNav()"></div>
-        <div id="startEndButton"><div id="startGameButton" onclick="startGame()"><p>Start Game</p></div></div>
-        <div id="store" onclick="store()"><p>Store</p></div>
-        <div id="settings" onclick="settings()"><p>Settings</p></div>
+        <div id="openNav">
+            <img src="./image/MenuIcon.png" id="navImage" onclick="openNav()">
+        </div>
+
+        <div id="startEndButton">
+            <div class="navLinks" id="startGameButton" onclick="startGame()">
+                <p>Start Game</p>
+            </div>
+        </div>
+
+        <div class="navLinks" id="storeButton">
+            <div onclick="openStore()">
+                <p>Store</p>
+            </div>
+        </div>
+
+        <div class="navLinks" id="settings" onclick="settings()">
+            <p>Settings</p>
+        </div>
     </nav>
 
+    <!-- Info Page -->
+
+    <div id="Info">
+
+        <div id="WebsideExplaination">
+            <h3 id="explHeadline">How does this Website work?</h3>
+            <p id="websiteExplText">This Website is mainly about the Tic Tac Toe on the page "Start Game". There you can
+                play Against a
+                friend or your personal enemy! For every win you get +1 Score. You can buy things in the Store like an
+                better Character or a cooler Color! But there are many more things! Just take a look an go on the
+                "Store" page! And at the last there is a page that is called "Settings" where you can choose the things
+                you bought. At the beginning there wont be much but if you grind enough with your friends, you can reach
+                everthing and get a full inventory!</p>
+            <p id="mark" onclick="startGame()">Much fun playing!</mark></p>
+        </div>
 
 
+    </div>
 
-
-
-    <!--<div id="store">
-        <h1>Store</h1>
-
-
-
-    </div>-->
-
-
-
+    <!-- Game -->
 
     <div id="startGame">
         <div id="game">
@@ -48,12 +77,64 @@
                 <div id="field9" onclick="game(this, 2, 2)"></div>
             </div>
 
-            <div id="divPlayerOne">Score Player One: <div id="player1Score">0</div>
-            </div>
-            <div id="divPlayerTwo">Score Player Two: <div id="player2Score">0</div>
+            <div id="score">
+                Score Player One: <div id="player1Score">0</div><br>
+                Score Player Two: <div id="player2Score">0</div>
             </div>
             <div id="gameTie">It's a Tie!</div>
         </div>
+    </div>
+
+    <!-- Store -->
+
+    <div id="store">
+        <h2>Store</h2>
+        <p>Here you can buy stuff for your Score! Much fun playing to get a high Score!</p>
+
+        <select onchange="changeItems()" name="choosePlayer" id="choosePlayerStore">
+            <option value="both">Standard things</option>
+            <option value="player1">Player 1</option>
+            <option value="player2">Player 2</option>
+        </select>
+
+
+        <div id="StandardItems">
+            <div id="item1"><p>Not defined yet</p></div>
+            <div id="item2"><p>Not defined yet</p></div>
+            <div id="item3"><p>Not defined yet</p></div>
+            <div id="item4"><p>Not defined yet</p></div>
+            <div id="item5"><p>Not defined yet</p></div>
+            <div id="item6"><p>Not defined yet</p></div>
+            <div id="item7"><p>Not defined yet</p></div>
+            <div id="item8"><p>Not defined yet</p></div>
+            <div id="item9"><p>Not defined yet</p></div>
+        </div>
+
+        <div id="ItemsPlayerOne">
+            <div id="item10"><img src="./image/shop/PlayerOne/CharacterOne.png"><p>Character One</p></div>
+            <div id="item11"><img src="./image/shop/PlayerOne/CharacterTwo.png"><p>Character Two</p></div>
+            <div id="item12"><img src="./image/shop/PlayerOne/CharacterThree.png"><p>Character Three</p></div>
+            <div id="item13"><p>Color One</p></div>
+            <div id="item14"><p>Color Two</p></div>
+            <div id="item15"><p>Color Three</p></div>
+            <div id="item16"><p>Not defined yet</p></div>
+            <div id="item17"><p>Not defined yet</p></div>
+            <div id="item18"><p>Not defined yet</p></div>
+        </div>
+
+        <div id="ItemsPlayerTwo">
+            <div id="item19"><p>Not defined yet</p></div>
+            <div id="item20"><p>Not defined yet</p></div>
+            <div id="item21"><p>Not defined yet</p></div>
+            <div id="item22"><p>Not defined yet</p></div>
+            <div id="item23"><p>Not defined yet</p></div>
+            <div id="item24"><p>Not defined yet</p></div>
+            <div id="item25"><p>Not defined yet</p></div>
+            <div id="item26"><p>Not defined yet</p></div>
+            <div id="item27"><p>Not defined yet</p></div>
+        </div>
+
+
     </div>
 
 
