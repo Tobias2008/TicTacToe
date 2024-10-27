@@ -3,6 +3,11 @@
     src: url(../font/sofachrome\ rg.otf);
 }
 
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+}
+
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
@@ -34,6 +39,7 @@ nav {
     left: -16%;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
+    z-index: 100
 }
 
 #navImage {
@@ -131,6 +137,13 @@ p {
     text-shadow: 2px 2px 4px #000000;
 }
 
+mark {
+    background-color: #00000000;
+    color: white;
+    font-style: italic;
+    font-size: 2.2rem;
+}
+
 /* Style Game */
 
 #startGame {
@@ -148,13 +161,35 @@ p {
 #field9 {
     width: 160px;
     height: 160px;
-    border: 1px solid #000;
+    border-radius: 5px;
     cursor: pointer;
     margin-top: 20%;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    background-color: white;
+    background-color: #3E1F47;
+}
+
+.animationGameField:hover{
+    animation: characterGameRunningHover 0.5s infinite alternate ease-in-out forwards;
+}
+
+@keyframes characterGameRunningHover {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    33% {
+        transform: rotate(3deg);
+    }
+
+    66% {
+        transform: rotate(-3deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 #gameField {
@@ -200,6 +235,15 @@ p {
 
 }
 
+.character {
+
+    height: 80%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 8%;
+}
+
 /* Style Store */
 
 #store {
@@ -239,6 +283,7 @@ p {
     text-align: center;
     font-size: 2.5rem;
     border-radius: 15px;
+    z-index: 10;
 }
 
 select {
@@ -272,9 +317,113 @@ option {
     gap: 1%;
 }
 
+#store p {
+    margin-right: 10%;
+    margin-left: 10%;
+}
 
+#item10,
+#item11,
+#item12,
+#item19,
+#item20,
+#item21 {
+    background-color: red;
+    border-radius: 15px;
+    max-height: 700px;
 
+}
 
+#item10 #character1,
+#item11 #character2,
+#item12 #character3,
+#item19 #character4,
+#item20 #character5,
+#item21 #character6 {
+    height: 50%;
+    padding-top: 12%;
+    filter: grayscale(100%);
+    transition: 0.5s;
+}
+
+#item10:hover #character1,
+#item11:hover #character2,
+#item12:hover #character3,
+#item19:hover #character4,
+#item20:hover #character5,
+#item21:hover #character6 {
+    filter: grayscale(0%);
+    transition: 0.5s;
+}
+
+#item10:hover #schloss10,
+#item11:hover #schloss11,
+#item12:hover #schloss12,
+#item19:hover #schloss19,
+#item20:hover #schloss20,
+#item21:hover #schloss21 {
+    opacity: 0.5;
+}
+
+#item10 #schloss10,
+#item11 #schloss11,
+#item12 #schloss12,
+#item19 #schloss19,
+#item20 #schloss20,
+#item21 #schloss21 {
+    transition: 0.5s;
+}
+
+#item10 p,
+#item11 p,
+#item12 p,
+#item19 p,
+#item20 p,
+#item21 p {
+    font-size: 2.5rem;
+    margin-top: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#schloss10,
+#schloss11,
+#schloss12,
+#schloss19,
+#schloss20,
+#schloss21 {
+    position: absolute;
+    width: 32%;
+    z-index: 1;
+    top: 62%
+}
+
+#schloss10,
+#schloss19 {
+    left: 0.6%;
+}
+
+#schloss11,
+#schloss20 {
+    left: 34%;
+}
+
+#schloss12,
+#schloss21 {
+    left: 67.4%;
+}
+
+.buyButton {
+    background-color: #000000;
+    color: white;
+    border-radius: 15px;
+    padding: 2%;
+    cursor: pointer;
+    font-size: 2.5rem;
+    margin-top: 10%;
+}
 
 /*
 #item1:hover,

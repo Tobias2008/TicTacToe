@@ -16,7 +16,7 @@
 
 <div id="startWebsite"><img src="./image/animations/pure-css-planet-loader-animation-ezgif.com-gif-maker.gif" alt=""></div>
 -->
-    <h1 id="headline">The real Tic Tac Toe</h1>
+    <h1 id="headline">The galactic Tic-Tac-Toe</h1>
 
     <!-- Nav -->
 
@@ -50,7 +50,8 @@
             <h3 id="explHeadline">How does this Website work?</h3>
             <p id="websiteExplText">This Website is mainly about the Tic Tac Toe on the page "Start Game". There you can
                 play Against a
-                friend or your personal enemy! For every win you get +1 Score. You can buy things in the Store like an
+                friend or your personal enemy! For every win you get +1 Score. For every round that get played, your
+                shared Score get +1 as well. You can buy things in the Store like an
                 better Character or a cooler Color! But there are many more things! Just take a look an go on the
                 "Store" page! And at the last there is a page that is called "Settings" where you can choose the things
                 you bought. At the beginning there wont be much but if you grind enough with your friends, you can reach
@@ -66,15 +67,15 @@
     <div id="startGame">
         <div id="game">
             <div id="gameField">
-                <div id="field1" onclick="game(this, 0, 0)"></div>
-                <div id="field2" onclick="game(this, 0, 1)"></div>
-                <div id="field3" onclick="game(this, 0, 2)"></div>
-                <div id="field4" onclick="game(this, 1, 0)"></div>
-                <div id="field5" onclick="game(this, 1, 1)"></div>
-                <div id="field6" onclick="game(this, 1, 2)"></div>
-                <div id="field7" onclick="game(this, 2, 0)"></div>
-                <div id="field8" onclick="game(this, 2, 1)"></div>
-                <div id="field9" onclick="game(this, 2, 2)"></div>
+                <div id="field1" class="animationGameField" onclick="game(this, 0, 0)"></div>
+                <div id="field2" class="animationGameField" onclick="game(this, 0, 1)"></div>
+                <div id="field3" class="animationGameField" onclick="game(this, 0, 2)"></div>
+                <div id="field4" class="animationGameField" onclick="game(this, 1, 0)"></div>
+                <div id="field5" class="animationGameField" onclick="game(this, 1, 1)"></div>
+                <div id="field6" class="animationGameField" onclick="game(this, 1, 2)"></div>
+                <div id="field7" class="animationGameField" onclick="game(this, 2, 0)"></div>
+                <div id="field8" class="animationGameField" onclick="game(this, 2, 1)"></div>
+                <div id="field9" class="animationGameField" onclick="game(this, 2, 2)"></div>
             </div>
 
             <div id="score">
@@ -92,46 +93,108 @@
         <p>Here you can buy stuff for your Score! Much fun playing to get a high Score!</p>
 
         <select onchange="changeItems()" name="choosePlayer" id="choosePlayerStore">
-            <option value="both">Standard things</option>
             <option value="player1">Player 1</option>
+            <option value="both">Standard things</option>
             <option value="player2">Player 2</option>
         </select>
 
+        <div id="scoreOfActivePlayer"></div>
+
 
         <div id="StandardItems">
-            <div id="item1"><p>Not defined yet</p></div>
-            <div id="item2"><p>Not defined yet</p></div>
-            <div id="item3"><p>Not defined yet</p></div>
-            <div id="item4"><p>Not defined yet</p></div>
-            <div id="item5"><p>Not defined yet</p></div>
-            <div id="item6"><p>Not defined yet</p></div>
-            <div id="item7"><p>Not defined yet</p></div>
-            <div id="item8"><p>Not defined yet</p></div>
-            <div id="item9"><p>Not defined yet</p></div>
+            <div id="item1">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item2">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item3">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item4">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item5">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item6">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item7">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item8">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item9">
+                <p>Not defined yet</p>
+            </div>
         </div>
 
         <div id="ItemsPlayerOne">
-            <div id="item10"><img src="./image/shop/PlayerOne/CharacterOne.png"><p>Character One</p></div>
-            <div id="item11"><img src="./image/shop/PlayerOne/CharacterTwo.png"><p>Character Two</p></div>
-            <div id="item12"><img src="./image/shop/PlayerOne/CharacterThree.png"><p>Character Three</p></div>
-            <div id="item13"><p>Color One</p></div>
-            <div id="item14"><p>Color Two</p></div>
-            <div id="item15"><p>Color Three</p></div>
-            <div id="item16"><p>Not defined yet</p></div>
-            <div id="item17"><p>Not defined yet</p></div>
-            <div id="item18"><p>Not defined yet</p></div>
+            
+            <div id="item10"><img id="schloss10" src="./image/shop/Items/schloss.png" alt=""><img id="character1" src="./image/shop/PlayerOne/CharacterOne.png">
+                <p>Character One<br>Cost: 5 Score</p>
+                <p class="buyButton" onclick="buyCharacter('player1', '../image/shop/PlayerOne/CharacterOne.png', 5, 1)">Buy</p>
+            </div>
+            <div id="item11"><img id="schloss11" src="./image/shop/Items/schloss.png" alt=""><img id="character2" src="./image/shop/PlayerOne/CharacterTwo.png">
+                <p>Character Two <br>Cost: 10 Score</p>
+                <p class="buyButton" onclick="buyCharacter('player1', '../image/shop/PlayerOne/CharacterTwo.png', 10, 2)">Buy</p>
+
+            </div>
+            <div id="item12"><img id="schloss12" src="./image/shop/Items/schloss.png" alt=""><img id="character3" src="./image/shop/PlayerOne/CharacterThree.png">
+                <p>Character Three <br>Cost: 15 Score</p>
+                <p class="buyButton" onclick="buyCharacter('player1', '../image/shop/PlayerOne/CharacterThree.png', 15, 3)">Buy</p>
+
+            </div>
+            <div id="item13">
+                <p>Color One</p>
+            </div>
+            <div id="item14">
+                <p>Color Two</p>
+            </div>
+            <div id="item15">
+                <p>Color Three</p>
+            </div>
+            <div id="item16">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item17">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item18">
+                <p>Not defined yet</p>
+            </div>
         </div>
 
         <div id="ItemsPlayerTwo">
-            <div id="item19"><p>Not defined yet</p></div>
-            <div id="item20"><p>Not defined yet</p></div>
-            <div id="item21"><p>Not defined yet</p></div>
-            <div id="item22"><p>Not defined yet</p></div>
-            <div id="item23"><p>Not defined yet</p></div>
-            <div id="item24"><p>Not defined yet</p></div>
-            <div id="item25"><p>Not defined yet</p></div>
-            <div id="item26"><p>Not defined yet</p></div>
-            <div id="item27"><p>Not defined yet</p></div>
+            <div id="item19"><img id="schloss19" src="./image/shop/Items/schloss.png" alt=""><img id="character4" src="./image/shop/PlayerTwo/CharacterOne.png">
+                <p>Character One</p>
+            </div>
+            <div id="item20"><img id="schloss20" src="./image/shop/Items/schloss.png" alt=""><img id="character5" src="./image/shop/PlayerTwo/CharacterTwo.png">
+                <p>Character Two</p>
+            </div>
+            <div id="item21"><img id="schloss21" src="./image/shop/Items/schloss.png" alt=""><img id="character6" src="./image/shop/PlayerTwo/CharacterThree.png">
+                <p>Character Three</p>
+            </div>
+            <div id="item22">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item23">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item24">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item25">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item26">
+                <p>Not defined yet</p>
+            </div>
+            <div id="item27">
+                <p>Not defined yet</p>
+            </div>
         </div>
 
 

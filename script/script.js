@@ -1,7 +1,6 @@
-
 //  Author:  Payreder Tobias
 //  Start-Date:  18/10/2024
-//  Last-Modified-Date:  21/10/2024
+//  Last-Modified-Date:  27/10/2024
 
 
 // Tic Tac Toe game
@@ -24,7 +23,8 @@ let player2 = {
     name: "Player 2",
     color: "red",
     weight: 40,
-    score: 0
+    score: 20,
+    character: '../image/shop/PlayerTwo/CharacterStandart.png'
 }
 
 let gameMatrix = [
@@ -121,9 +121,7 @@ function startGame() {
 
 function endGame() {
 
-    for (let i = 1; i < 10; i++) {
-        document.getElementById('field' + i).style.backgroundColor = "white";
-    }
+
 
     console.log("Step1");
     document.getElementById('startEndButton').innerHTML = '<div onclick="startGame()"><p>Start Game</p></div>';
@@ -143,13 +141,18 @@ function endGame() {
 // Onclick event for each field - give each clicked field the player weight
 
 function game(fieldPlayer, row, col) {
+
+    let field = document.getElementById('field' + (row * 3 + col + 1));
+
     if (gameMatrix[row][col] === -1) {
         if (turn % 2 === 0) {
-            fieldPlayer.style.backgroundColor = player1.color;
+            fieldPlayer.innerHTML = '<img src="' + player1.character + '" alt="Player 1" class="character">';
             gameMatrix[row][col] = player1.weight;
+           document.getElementById('field' + (row * 3 + col + 1)).classList.remove('animationGameField');
         } else {
-            fieldPlayer.style.backgroundColor = player2.color;
+            fieldPlayer.innerHTML = '<img src="' + player2.character + '" alt="Player 2" class="character">';
             gameMatrix[row][col] = player2.weight;
+            document.getElementById('field' + (row * 3 + col + 1)).classList.remove('animationGameField');
         }
         turn++;
     }
@@ -232,7 +235,10 @@ function resetGame() {
 
     if (runningGame) {
         for (let i = 1; i < 10; i++) {
-            document.getElementById('field' + i).style.backgroundColor = "white";
+            document.getElementById('field' + i).innerHTML = "";
+            document.getElementById('field' + i).classList.remove('animationGameField');
+            document.getElementById('field' + i).offsetHeight;
+            document.getElementById('field' + i).classList.add('animationGameField');
         }
     }
 
@@ -241,6 +247,8 @@ function resetGame() {
 // Store
 
 // open / close Store
+
+openStore();
 
 function openStore() {
     document.getElementById('store').style.display = "block";
@@ -278,21 +286,57 @@ function changeItems() {
     let player = ['both', 'player1', 'player2'];
     let playerItems = [document.getElementById('StandardItems'), document.getElementById('ItemsPlayerOne'), document.getElementById('ItemsPlayerTwo')];
 
+
     for (let i = 0; i < player.length; i++) {
         playerItems[i].style.display = 'none';
     }
 
-   
-        if (document.getElementById('choosePlayerStore').value == player[0]) {
-            playerItems[0].style.display = 'grid';
-            console.log("Both");
-        } else if (document.getElementById('choosePlayerStore').value == player[1]) {
-            playerItems[1].style.display = 'grid';
-            console.log("Player 1");
-        } else if (document.getElementById('choosePlayerStore').value == player[2]) {
-            playerItems[2].style.display = 'grid';
-            console.log("Player 2");
-        }
-    
 
+    if (document.getElementById('choosePlayerStore').value == player[0]) {
+        playerItems[0].style.display = 'grid';
+        console.log("Both");
+        document.getElementById('scoreOfActivePlayer').innerHTML = '<p>Your shared score is <mark>' + counter + '</mark>!</p>';
+    } else if (document.getElementById('choosePlayerStore').value == player[1]) {
+        playerItems[1].style.display = 'grid';
+        document.getElementById('scoreOfActivePlayer').innerHTML = '<p>Player One score is <mark>' + player1.score + '</mark>!</p>';
+
+        console.log("Player 1");
+    } else if (document.getElementById('choosePlayerStore').value == player[2]) {
+        playerItems[2].style.display = 'grid';
+        document.getElementById('scoreOfActivePlayer').innerHTML = '<p>Player Two score is <mark>' + player2.score + '</mark>!</p>';
+
+        console.log("Player 2");
+    }
+
+
+}
+
+/* Buy Items */
+
+function buyCharacter(player, character, cost, characterNum) {
+    if (player === 'player1') {
+        if (player1.score >= cost) {
+            player1.character = character;
+            player1.score -= cost;
+            document.getElementById("player1Score").innerHTML = player1.score;
+            document.getElementById('scoreOfActivePlayer').innerHTML = '<p>Player One score is <mark>' + player1.score + '</mark>!</p>';
+            document.getElementById('schloss' + (9 + characterNum)).style.display = "none";
+            document.getElementById('character' + characterNum).style.filter = "grayscale(0%)";
+        }
+    } else if (player === 'player2') {
+        if (player2.score >= cost) {
+            player2.character = character;
+            player2.score -= cost;
+            document.getElementById("player2Score").innerHTML = player2.score;
+            document.getElementById("scoreOfActivePlayer").innerHTML = player2.score;
+            document.getElementById('schloss' + (18 + characterNum)).style.display = "none";
+            document.getElementById('character' + (characterNum + 3)).style.filter = "grayscale(0%)";
+        }
+    } else if (player === 'both') {
+        if (counter >= cost) {
+            console.log("Counter: " + counter);
+            counter -= cost;
+            
+        }
+    }    
 }
