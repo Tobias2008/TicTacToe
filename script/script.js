@@ -15,7 +15,7 @@ let player1 = {
     name: "Player 1",
     color: "black",
     weight: 20,
-    score: 0,
+    score: 200,
     character: '../image/shop/PlayerOne/CharacterStandart.png'
 }
 
@@ -23,7 +23,7 @@ let player2 = {
     name: "Player 2",
     color: "red",
     weight: 40,
-    score: 20,
+    score: 0,
     character: '../image/shop/PlayerTwo/CharacterStandart.png'
 }
 
@@ -76,7 +76,7 @@ function closeNav() {
         setTimeout(() => {
             nav.classList.remove('animateNavCloseWhileGame');
             myNav.style.paddingRight = "5.5%";
-            myNavImg.style.position = "fixed";
+            myNavImg.style.position = "relative";
             myNavImg.style.left = "15%";
 
         }, 270);
@@ -94,7 +94,7 @@ function closeNav() {
 }
 
 function closeNavWhileGameStart() {
-
+    
 }
 
 
@@ -142,17 +142,18 @@ function endGame() {
 
 function game(fieldPlayer, row, col) {
 
-    let field = document.getElementById('field' + (row * 3 + col + 1));
 
     if (gameMatrix[row][col] === -1) {
         if (turn % 2 === 0) {
             fieldPlayer.innerHTML = '<img src="' + player1.character + '" alt="Player 1" class="character">';
             gameMatrix[row][col] = player1.weight;
            document.getElementById('field' + (row * 3 + col + 1)).classList.remove('animationGameField');
+           document.getElementById('field' + (row * 3 + col + 1)).style.cursor = "default";
         } else {
             fieldPlayer.innerHTML = '<img src="' + player2.character + '" alt="Player 2" class="character">';
             gameMatrix[row][col] = player2.weight;
             document.getElementById('field' + (row * 3 + col + 1)).classList.remove('animationGameField');
+            document.getElementById('field' + (row * 3 + col + 1)).style.cursor = "default";
         }
         turn++;
     }
@@ -239,6 +240,7 @@ function resetGame() {
             document.getElementById('field' + i).classList.remove('animationGameField');
             document.getElementById('field' + i).offsetHeight;
             document.getElementById('field' + i).classList.add('animationGameField');
+            document.getElementById('field' + i).style.cursor = "pointer";
         }
     }
 
@@ -248,7 +250,6 @@ function resetGame() {
 
 // open / close Store
 
-openStore();
 
 function openStore() {
     document.getElementById('store').style.display = "block";

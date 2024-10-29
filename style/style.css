@@ -328,11 +328,13 @@ option {
 #item19,
 #item20,
 #item21 {
-    background-color: red;
+    background-color: #3122448a;
+    border: #5a189abb 4px solid;
     border-radius: 15px;
     max-height: 700px;
 
 }
+
 
 #item10 #character1,
 #item11 #character2,
@@ -416,13 +418,19 @@ option {
 }
 
 .buyButton {
-    background-color: #000000;
+    background-color: #5a189abb;
     color: white;
     border-radius: 15px;
     padding: 2%;
     cursor: pointer;
     font-size: 2.5rem;
     margin-top: 10%;
+    transition: 0.5s;
+}
+
+.buyButton:hover {
+    background-color: #5a189a;
+    color: #d1a9f8;
 }
 
 /*
