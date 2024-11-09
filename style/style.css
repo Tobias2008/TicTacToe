@@ -14,7 +14,7 @@ body {
     font-size: 2.5rem;
     text-align: center;
     user-select: none;
-    background-image: url('../image/BackgroundOne.png');
+    background-image: url('../image/Background/BackgroundOne.png');
     background-color: rgb(0, 0, 0);
     background-size: cover;
     background-attachment: fixed;
@@ -35,11 +35,12 @@ nav {
 
     padding: 2%;
     text-align: end;
-    padding-right: 4%;
-    left: -16%;
+    padding-top: 2.3%;
+    padding-right: 5%;
+    left: -16.5%;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
-    z-index: 100
+    z-index: 100;
 }
 
 #navImage {
@@ -48,7 +49,7 @@ nav {
     cursor: pointer;
     position: relative;
     bottom: 20px;
-    left: 26%;
+    left: 32%;
 }
 
 nav div p {
@@ -67,12 +68,12 @@ nav div p {
 
 @keyframes navigationOpen {
     0% {
-        left: -16%;
+        left: -16.5%;
     }
 
     100% {
         left: 0;
-        padding-right: 4%;
+        padding-right: 5%;
     }
 }
 
@@ -88,7 +89,7 @@ nav div p {
     }
 
     100% {
-        left: -16%;
+        left: -16.5%;
     }
 }
 
@@ -100,11 +101,11 @@ nav div p {
 @keyframes navigationCloseWhileGame {
     0% {
         left: 0;
-        padding-right: 4%;
+        padding-right: 5%;
     }
 
     100% {
-        left: -14%;
+        left: -15%;
     }
 }
 
@@ -170,7 +171,7 @@ mark {
     background-color: #3E1F47;
 }
 
-.animationGameField:hover{
+.animationGameField:hover {
     animation: characterGameRunningHover 0.5s infinite alternate ease-in-out forwards;
 }
 
@@ -263,7 +264,6 @@ mark {
 
 #mark {
     font-weight: bold;
-    cursor: pointer;
 }
 
 #score {
@@ -309,7 +309,6 @@ option {
     cursor: pointer;
 }
 
-#StandardItems,
 #ItemsPlayerOne,
 #ItemsPlayerTwo {
     display: none;
@@ -322,6 +321,71 @@ option {
     margin-left: 10%;
 }
 
+/* Buy Character */
+
+#StandardItems {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1%;
+}
+
+#item1,
+#item2,
+#item3 {
+    border: #5a189abb 4px solid;
+    border-radius: 15px;
+    min-height: 500px;
+    max-height: 700px;
+    background-color: #3122448a;
+    
+}
+
+#Background1,
+#Background2,
+#Background3 {
+    width: 100%;
+    border-radius: 15px;
+    filter: grayscale(60%);
+}
+
+#schloss1,
+#schloss2,
+#schloss3 {
+    position: absolute;
+    width: 32%;
+    height: 54%;
+    z-index: 1;
+    top: 62%;
+    transition: 0.3s ease;
+}
+
+#schloss1 {
+    position: absolute;
+    left: 0.6%;
+}
+
+#schloss2 {
+    position: absolute;
+    left: 34%;
+}
+
+#schloss3 {
+    position: absolute;
+    left: 67.4%;
+}
+
+#schloss1:hover,
+#schloss2:hover,
+#schloss3:hover {
+    opacity: 0.5;
+}
+
+#item1:hover #Background1,
+#item2:hover #Background2,
+#item3:hover #Background3{
+    filter: grayscale(0%);
+}
+
 #item10,
 #item11,
 #item12,
@@ -331,10 +395,10 @@ option {
     background-color: #3122448a;
     border: #5a189abb 4px solid;
     border-radius: 15px;
+    min-height: 500px;
     max-height: 700px;
 
 }
-
 
 #item10 #character1,
 #item11 #character2,
@@ -387,7 +451,6 @@ option {
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 #schloss10,
@@ -432,6 +495,113 @@ option {
     background-color: #5a189a;
     color: #d1a9f8;
 }
+
+/* Buy Audio */
+
+.audio {
+    filter: blur(1.5px);
+    transition: all 0.2s ease;
+}
+
+.audio:hover {
+    filter: blur(0.75px);
+}
+
+#item13,
+#item14,
+#item15,
+#item22,
+#item23,
+#item24 {
+    background-color: #3122448a;
+    border: #5a189abb 4px solid;
+    border-radius: 15px;
+    min-height: 400px;
+    max-height: 700px;
+    margin-top: 10%;
+
+}
+
+#item13 audio,
+#item14 audio,
+#item15 audio,
+#item22 audio,
+#item23 audio,
+#item24 audio {
+    width: 50%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10%;
+}
+
+
+
+
+#myRange {
+    position: fixed;
+    bottom: 130px;
+    right: -20px;
+
+    /* Styling from ChatGPT Start */
+
+    -webkit-appearance: none;
+    appearance: none;
+    transform: rotate(270deg);
+    width: 130px;
+    height: 8px;
+    background-color: #58228f;
+    border-radius: 5px;
+    outline: none;
+}
+
+
+
+#myRange::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #3d1069;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 0px 2px #000;
+}
+
+#myRange:active::-webkit-slider-thumb {
+    background-color: #31085a;
+}
+
+/* Styling from Chatgpt END */
+
+
+#unmuteVolume {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 29px;
+    cursor: pointer;
+    width: 2%;
+    z-index: 100;
+}
+
+#muteVolume {
+    position: fixed;
+    bottom: 20px;
+    right: 29px;
+    cursor: pointer;
+    width: 2%;
+    z-index: 100;
+}
+
+
+
+/* Settings */
+
+#settingsPage {
+    display: none;
+}
+
 
 /*
 #item1:hover,

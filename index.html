@@ -8,10 +8,28 @@
     <script src="./script/script.js" defer></script>
     <link rel="stylesheet" href="./style/style.css">
     <link rel="icon" href="./image/Icon.png">
+
+    <!--<link rel="preload" href="./image/Background/BackgroundFour.jpg" as="image">
+    <link rel="preload" href="./image/Background/BackgroundOne.jpg" as="image">
+    <link rel="preload" href="./image/Background/BackgroundThree.jpg" as="image">
+    <link rel="preload" href="./image/Background/BackgroundTwo.jpg" as="image">
+    <link rel="preload" href="./image/shop/Items/schloss.png" as="image">
+    <link rel="preload" href="./image/shop/PlayerOne/Character/CharacterOne.png" as="image">
+    <link rel="preload" href="./image/shop/PlayerOne/Character/CharacterThree.png" as="image">
+    <link rel="preload" href="./image/shop/PlayerOne/Character/CharacterTwo.png" as="image">
+    <link rel="preload" href="./image/shop/PlayerTwo/Character/CharacterOne.png" as="image">
+    <link rel="preload" href="./image/shop/PlayerTwo/Character/CharacterThree.png" as="image">
+    <link rel="preload" href="./image/shop/PlayerTwo/Character/CharacterTwo.png" as="image">
+    <link rel="preload" href="./image/Background/BackgroundFour.png" as="image">
+    <link rel="preload" href="./image/Background/BackgroundThree.png" as="image">
+    <link rel="preload" href="./image/Background/BackgroundTwo.png" as="image">
+    <link rel="preload" href="./image/Background/BackgroundOne.png" as="image">-->
+
 </head>
 
 <body>
 
+    
     <!-- Start Website 
 
 <div id="startWebsite"><img src="./image/animations/pure-css-planet-loader-animation-ezgif.com-gif-maker.gif" alt=""></div>
@@ -37,8 +55,10 @@
             </div>
         </div>
 
-        <div class="navLinks" id="settings" onclick="settings()">
-            <p>Settings</p>
+        <div class="navLinks" id="settingsButton">
+            <div onclick="openSettings()">
+                <p>Settings</p>
+            </div>
         </div>
     </nav>
 
@@ -56,7 +76,7 @@
                 "Store" page! And at the last there is a page that is called "Settings" where you can choose the things
                 you bought. At the beginning there wont be much but if you grind enough with your friends, you can reach
                 everthing and get a full inventory!</p>
-            <p id="mark" onclick="startGame()">Much fun playing!</mark></p>
+            <p id="mark">Much fun playing!</p>
         </div>
 
 
@@ -103,23 +123,28 @@
 
         <div id="StandardItems">
             <div id="item1">
-                <p>Not defined yet</p>
+                <img src="./image/shop/Items/schloss.png" alt="" id="schloss1">
+                <img id="Background1" src="./image/Background/BackgroundTwo.jpg" alt="">
+                <p style="font-size: 2rem;">Background Image One <br>Cost: 5 Shared Score</p>
+                <p class="buyButton" onclick="buyBackground('../image/Background/BackgroundTwo.png', 5, 1)">Buy
+                </p>
             </div>
             <div id="item2">
-                <p>Not defined yet</p>
+                <img src="./image/shop/Items/schloss.png" alt="" id="schloss2">
+                <img id="Background2" src="./image/Background/BackgroundThree.jpg" alt="">
+                <p style="font-size: 2rem;">Background Image Two <br>Cost: 10 Shared Score</p>
+                <p class="buyButton" onclick="buyBackground('../image/Background/BackgroundThree.png', 10, 2)">
+                    Buy</p>
             </div>
             <div id="item3">
-                <p>Not defined yet</p>
+                <img src="./image/shop/Items/schloss.png" alt="" id="schloss3">
+                <img id="Background3" src="./image/Background/BackgroundFour.jpg" alt="">
+                <p style="font-size: 2rem;">Background Image Three <br>Cost: 15 Shared Score</p>
+                <p class="buyButton" onclick="buyBackground('../image/Background/BackgroundFour.png', 15, 3)">Buy
+                </p>
             </div>
-            <div id="item4">
-                <p>Not defined yet</p>
-            </div>
-            <div id="item5">
-                <p>Not defined yet</p>
-            </div>
-            <div id="item6">
-                <p>Not defined yet</p>
-            </div>
+
+            <!--
             <div id="item7">
                 <p>Not defined yet</p>
             </div>
@@ -129,39 +154,62 @@
             <div id="item9">
                 <p>Not defined yet</p>
             </div>
+            -->
         </div>
 
         <div id="ItemsPlayerOne">
 
             <div id="item10"><img id="schloss10" src="./image/shop/Items/schloss.png" alt=""><img id="character1"
-                    src="./image/shop/PlayerOne/CharacterOne.png">
+                    src="./image/shop/PlayerOne/Character/CharacterOne.png">
                 <p>Character One<br>Cost: 5 Score</p>
                 <p class="buyButton"
-                    onclick="buyCharacter('player1', '../image/shop/PlayerOne/CharacterOne.png', 5, 1)">Buy</p>
+                    onclick="buyCharacter('player1', '../image/shop/PlayerOne/Character/CharacterOne.png', 5, 1)">Buy
+                </p>
             </div>
             <div id="item11"><img id="schloss11" src="./image/shop/Items/schloss.png" alt=""><img id="character2"
-                    src="./image/shop/PlayerOne/CharacterTwo.png">
+                    src="./image/shop/PlayerOne/Character/CharacterTwo.png">
                 <p>Character Two <br>Cost: 10 Score</p>
                 <p class="buyButton"
-                    onclick="buyCharacter('player1', '../image/shop/PlayerOne/CharacterTwo.png', 10, 2)">Buy</p>
+                    onclick="buyCharacter('player1', '../image/shop/PlayerOne/Character/CharacterTwo.png', 10, 2)">Buy
+                </p>
 
             </div>
             <div id="item12"><img id="schloss12" src="./image/shop/Items/schloss.png" alt=""><img id="character3"
-                    src="./image/shop/PlayerOne/CharacterThree.png">
+                    src="./image/shop/PlayerOne/Character/CharacterThree.png">
                 <p>Character Three <br>Cost: 15 Score</p>
                 <p class="buyButton"
-                    onclick="buyCharacter('player1', '../image/shop/PlayerOne/CharacterThree.png', 15, 3)">Buy</p>
-
+                    onclick="buyCharacter('player1', '../image/shop/PlayerOne/Character/CharacterThree.png', 15, 3)">Buy
+                </p>
             </div>
+
+
+
+
+
+
+
             <div id="item13">
-                <p>Color One</p>
+                <audio id="audio1" class="audio" src="./image/shop/PlayerOne/Audio/Attack2-2.mp3" controls></audio>
+                <p>Audio One <br>Cost: 5 Score</p>
+                <p class="buyButton" onclick="buyAudio('player1', '../image/shop/PlayerOne/Audio/Attack2-2.mp3', 5, 1)">
+                    Buy
+                </p>
             </div>
             <div id="item14">
-                <p>Color Two</p>
+                <audio id="audio2" class="audio" src="./image/shop/PlayerOne/Audio/Attack3-2.mp3" controls></audio>
+                <p>Audio Two <br>Cost: 10 Score</p>
+                <p class="buyButton"
+                    onclick="buyAudio('player1', '../image/shop/PlayerOne/Audio/Attack3-2.mp3', 10, 2)">Buy
+                </p>
             </div>
             <div id="item15">
-                <p>Color Three</p>
+                <audio id="audio3" class="audio" src="./image/shop/PlayerOne/Audio/Attack4-2.mp3" controls></audio>
+                <p>Audio Three <br>Cost: 15 Score</p>
+                <p class="buyButton"
+                    onclick="buyAudio('player1', '../image/shop/PlayerOne/Audio/Attack4-2.mp3', 15, 3)">Buy
+                </p>
             </div>
+            <!--
             <div id="item16">
                 <p>Not defined yet</p>
             </div>
@@ -171,36 +219,68 @@
             <div id="item18">
                 <p>Not defined yet</p>
             </div>
+            -->
         </div>
+
+
+
+
+
+
+
 
         <div id="ItemsPlayerTwo">
             <div id="item19"><img id="schloss19" src="./image/shop/Items/schloss.png" alt=""><img id="character4"
-                    src="./image/shop/PlayerTwo/CharacterOne.png">
+                    src="./image/shop/PlayerTwo/Character/CharacterOne.png">
                 <p>Character One</p>
                 <p class="buyButton"
-                    onclick="buyCharacter('player1', '../image/shop/PlayerOne/CharacterTwo.png', 5, 4)">Buy</p>
+                    onclick="buyCharacter('player2', '../image/shop/PlayerTwo/Character/CharacterOne.png', 5, 1)">Buy
+                </p>
             </div>
             <div id="item20"><img id="schloss20" src="./image/shop/Items/schloss.png" alt=""><img id="character5"
-                    src="./image/shop/PlayerTwo/CharacterTwo.png">
+                    src="./image/shop/PlayerTwo/Character/CharacterTwo.png">
                 <p>Character Two</p>
                 <p class="buyButton"
-                    onclick="buyCharacter('player1', '../image/shop/PlayerOne/CharacterTwo.png', 10, 5)">Buy</p>
+                    onclick="buyCharacter('player2', '../image/shop/PlayerTwo/Character/CharacterTwo.png', 10, 2)">Buy
+                </p>
             </div>
             <div id="item21"><img id="schloss21" src="./image/shop/Items/schloss.png" alt=""><img id="character6"
-                    src="./image/shop/PlayerTwo/CharacterThree.png">
+                    src="./image/shop/PlayerTwo/Character/CharacterThree.png">
                 <p>Character Three</p>
                 <p class="buyButton"
-                    onclick="buyCharacter('player1', '../image/shop/PlayerOne/CharacterTwo.png', 15, 6)">Buy</p>
+                    onclick="buyCharacter('player2', '../image/shop/PlayerTwo/Character/CharacterThree.png', 15, 3)">Buy
+                </p>
             </div>
+
+
+
+
+
+
             <div id="item22">
-                <p>Not defined yet</p>
+                <audio id="audio4" class="audio" src="./image/shop/PlayerTwo/Audio/Attack2-1.mp3" controls></audio>
+                <p>Audio One <br>Cost: 5 Score</p>
+                <p class="buyButton" onclick="buyAudio('player2', '../image/shop/PlayerTwo/Audio/Attack2-1.mp3', 5, 1)">
+                    Buy
+                </p>
+
             </div>
             <div id="item23">
-                <p>Not defined yet</p>
+                <audio id="audio5" class="audio" src="./image/shop/PlayerTwo/Audio/Attack3-1.mp3" controls></audio>
+                <p>Audio Two <br>Cost: 10 Score</p>
+                <p class="buyButton"
+                    onclick="buyAudio('player2', '../image/shop/PlayerTwo/Audio/Attack3-1.mp3', 10, 2)">Buy
+                </p>
+
             </div>
             <div id="item24">
-                <p>Not defined yet</p>
+                <audio id="audio6" class="audio" src="./image/shop/PlayerTwo/Audio/Attack4-1.mp3" controls></audio>
+                <p>Audio Three <br>Cost: 15 Score</p>
+                <p class="buyButton"
+                    onclick="buyAudio('player2', '../image/shop/PlayerTwo/Audio/Attack4-1.mp3', 15, 3)">Buy</p>
             </div>
+
+            <!--    
             <div id="item25">
                 <p>Not defined yet</p>
             </div>
@@ -210,11 +290,20 @@
             <div id="item27">
                 <p>Not defined yet</p>
             </div>
+            -->
+
         </div>
-
-
     </div>
 
+    <div id="settingsPage">
+        <p style="color: red;">Die super fantastischen Settings... Wow</p>
+    </div>
+
+    <div id="volume">
+        <input type="range" id="myRange" min="0" max="100" step="1" value="10" onchange="setVolume()">
+        <img id="muteVolume" src="./image/speaker.png" alt="" onclick="muteVolume()">
+        <img id="unmuteVolume" src="./image/mute.png" alt="" onclick="unmuteVolume()">
+    </div>
 
 </body>
 

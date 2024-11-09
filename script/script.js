@@ -1,6 +1,6 @@
 //  Author:  Payreder Tobias
 //  Start-Date:  18/10/2024
-//  Last-Modified-Date:  27/10/2024
+//  Last-Modified-Date:  09/11/2024
 
 
 // Tic Tac Toe game
@@ -9,23 +9,68 @@
 
 let turn = 0;
 
-let runningGame = false;
+
+let running = {
+    home: true,
+    game: false,
+    store: false,
+    settings: false
+}
 
 let player1 = {
     name: "Player 1",
     color: "black",
     weight: 20,
     score: 200,
-    character: '../image/shop/PlayerOne/CharacterStandart.png'
+    character: '../image/shop/PlayerOne/Character/CharacterStandart.png',
+    audio: '',
+    items: {
+        character0: true,
+        character1: false,
+        character2: false,
+        character3: false,
+        audio0: true,
+        audio1: false,
+        audio2: false,
+        audio3: false
+    },
+    equippedItems: {
+        character: 0,
+        audio: 0
+    }
 }
 
 let player2 = {
     name: "Player 2",
     color: "red",
     weight: 40,
-    score: 0,
-    character: '../image/shop/PlayerTwo/CharacterStandart.png'
+    score: 200,
+    character: '../image/shop/PlayerTwo/Character/CharacterStandart.png',
+    audio: '',
+    items: {
+        character0: true,
+        character1: false,
+        character2: false,
+        character3: false,
+        audio0: true,
+        audio1: false,
+        audio2: false,
+        audio3: false
+    },
+    equippedItems: {
+        character: 0,
+        audio: 0
+    }
 }
+
+let bothItems = {
+    background0: true,
+    background1: false,
+    background2: false,
+    background3: false
+}
+
+let volume = 0.1;
 
 let gameMatrix = [
     [-1, -1, -1],
@@ -33,16 +78,13 @@ let gameMatrix = [
     [-1, -1, -1]
 ]
 
-let counter = 0;
+let counter = 200;
 
-// Start Website
+player1.audio = new Audio('../image/shop/PlayerOne/Audio/Attack1-2.mp3');
+player1.audio.volume = volume;
 
-/*setTimeout(() => {
-    document.getElementById('startWebsite').style.display = "none";
-    document.getElementById('WebsideExplaination').style.display = "block";
-    document.getElementById('headline').style.display = "block";
-    document.getElementById('myNav').style.display = "block";
-}, 20000);*/
+player2.audio = new Audio('../image/shop/PlayerTwo/Audio/Attack1-1.mp3');
+player2.audio.volume = volume;
 
 // Nav
 
@@ -50,106 +92,122 @@ let myNav = document.getElementById('myNav');
 let myNavImg = document.getElementById('openNav');
 
 let nav = document.querySelector('#myNav');
+
 // Open Nav
 
 function openNav() {
-    nav.classList.add('animateNavOpen');
+    console.log("Open Nav: Start");
+
+    nav.style.animation = "none";
+    nav.offsetHeight;
+    nav.style.animation = "navigationOpen 0.2s ease-in-out forwards";
+
     document.getElementById('openNav').innerHTML = '<img src="./image/MenuIcon.png" id="navImage" onclick="closeNav()">';
 
-    setTimeout(() => {
-        nav.classList.remove('animateNavOpen');
-        myNav.style.left = "0%";
-        myNav.style.paddingRight = "4%";
 
-    }, 270);
+    console.log("Open Nav: End");
 }
 
 // Close Nav
 
 function closeNav() {
 
-    document.getElementById('openNav').innerHTML = '<img src="./image/MenuIcon.png" id="navImage" onclick="openNav()">'
+    console.log("Close Nav: Start");
 
-
-    if (runningGame) {
-        nav.classList.add('animateNavCloseWhileGame');
-        setTimeout(() => {
-            nav.classList.remove('animateNavCloseWhileGame');
-            myNav.style.paddingRight = "5.5%";
-            myNavImg.style.position = "relative";
-            myNavImg.style.left = "15%";
-
-        }, 270);
-    } else {
-        nav.classList.add('animateNavClose');
-        setTimeout(() => {
-            nav.classList.remove('animateNavClose');
-            myNav.style.left = "-16%";
-            myNav.style.paddingRight = "4%";
-        }, 270);
+    if (running.game == true) {
+        nav.style.animation = "none";
+        nav.offsetHeight;
+        nav.style.animation = "navigationCloseWhileGame 0.2s ease-in-out forwards";
+    }else {
+        nav.style.animation = "none";
+        nav.offsetHeight;
+        nav.style.animation = "navigationClose 0.2s ease-in-out forwards";
     }
 
+    document.getElementById('openNav').innerHTML = '<img src="./image/MenuIcon.png" id="navImage" onclick="openNav()">';
 
+    console.log("Close Nav: End");
 
 }
-
-function closeNavWhileGameStart() {
-    
-}
-
-
 
 // Start Game
 
 function startGame() {
-    closeStore();
 
-    document.getElementById('WebsideExplaination').style.display = "none";
+    console.log("Start Game: Start");
+    running.game = true;
 
     document.getElementById('startGame').style.display = "block";
     document.getElementById('gameField').style.display = "grid";
     document.getElementById('score').style.display = "block";
     document.getElementById('startEndButton').innerHTML = '<div id="startGameButton" onclick="endGame()"><p>End Game</p></div>';
 
-    runningGame = true;
-    closeNav();
+    if (running.home == true) {
+        closeHomePage();
+        running.home = false;
+    } else if (running.store == true) {
+        closeStore();
+        running.store = false;
+        document.getElementById('storeButton').innerHTML = ' <div class="navLinks" onclick="openStore()"><p>Store</p></div>';
 
+    } else if (running.settings == true) {
+        closeSettings();
+        running.settings = false;
+        document.getElementById('settingsButton').innerHTML = ' <div class="navLinks" onclick="openSettings()"><p>Settings</p></div>';
+    }
+
+    console.log("Start Game: End");
+
+
+
+   setTimeout(() => {
+    closeNav();
+   }, 10);
 }
 
 
 // End Game
 
 function endGame() {
+    console.log("End Game: Start");
 
+    running.game = false;
 
-
-    console.log("Step1");
     document.getElementById('startEndButton').innerHTML = '<div onclick="startGame()"><p>Start Game</p></div>';
     document.getElementById('gameField').style.display = "none";
     document.getElementById('startGame').style.display = "none";
     document.getElementById('score').style.display = "none";
 
-    runningGame = false;
+    if (running.store == false && running.settings == false && running.home == false) {
+        openHomePage();
+        running.home = true;
+    }
+
+    running.game = false;
+
+    console.log("End Game: End");
+
     closeNav();
-
     resetGame();
-
-    document.getElementById('WebsideExplaination').style.display = "block";
-
 }
+
 
 // Onclick event for each field - give each clicked field the player weight
 
 function game(fieldPlayer, row, col) {
 
+    console.log("Game: Start");
+
 
     if (gameMatrix[row][col] === -1) {
         if (turn % 2 === 0) {
+            player1.audio.play();
             fieldPlayer.innerHTML = '<img src="' + player1.character + '" alt="Player 1" class="character">';
             gameMatrix[row][col] = player1.weight;
-           document.getElementById('field' + (row * 3 + col + 1)).classList.remove('animationGameField');
-           document.getElementById('field' + (row * 3 + col + 1)).style.cursor = "default";
+            document.getElementById('field' + (row * 3 + col + 1)).classList.remove('animationGameField');
+            document.getElementById('field' + (row * 3 + col + 1)).style.cursor = "default";
         } else {
+            player2.audio.play(); 0
             fieldPlayer.innerHTML = '<img src="' + player2.character + '" alt="Player 2" class="character">';
             gameMatrix[row][col] = player2.weight;
             document.getElementById('field' + (row * 3 + col + 1)).classList.remove('animationGameField');
@@ -161,11 +219,15 @@ function game(fieldPlayer, row, col) {
     setTimeout(() => {
         checkWinner();
     }, 100);
+
+    console.log("Game: End");
 }
 
 // check if someone wins
 
 function checkWinner() {
+
+    console.log("Check Winner: Start");
     let winner = -1;
 
     // Check rows
@@ -221,11 +283,16 @@ function checkWinner() {
             document.getElementById("gameTie").style.display = "none";
         }, 2000);
     }
+
+    console.log("Check Winner: End");
 }
 
 // reset game after win or tie
 
 function resetGame() {
+
+    console.log("Reset Game: Start");
+
     turn = 0;
     gameMatrix = [
         [-1, -1, -1],
@@ -234,16 +301,17 @@ function resetGame() {
     ]
 
 
-    if (runningGame) {
-        for (let i = 1; i < 10; i++) {
-            document.getElementById('field' + i).innerHTML = "";
-            document.getElementById('field' + i).classList.remove('animationGameField');
-            document.getElementById('field' + i).offsetHeight;
-            document.getElementById('field' + i).classList.add('animationGameField');
-            document.getElementById('field' + i).style.cursor = "pointer";
-        }
+
+    for (let i = 1; i < 10; i++) {
+        document.getElementById('field' + i).innerHTML = "";
+        document.getElementById('field' + i).classList.remove('animationGameField');
+        document.getElementById('field' + i).offsetHeight;
+        document.getElementById('field' + i).classList.add('animationGameField');
+        document.getElementById('field' + i).style.cursor = "pointer";
     }
 
+
+    console.log("Reset Game: End");
 }
 
 // Store
@@ -252,30 +320,52 @@ function resetGame() {
 
 
 function openStore() {
+
+    running.store = true;
+
+    console.log("Open Store: Start");
+
     document.getElementById('store').style.display = "block";
     document.getElementById('storeButton').innerHTML = '<div onclick="closeStore()"><p>Store</p></div>';
 
-    document.getElementById('WebsideExplaination').style.display = "none";
-    document.getElementById('explHeadline').style.display = "none";
-    document.getElementById('websiteExplText').style.display = "none";
-    document.getElementById('mark').style.display = "none";
 
-    endGame();
+
+
+    console.log("Open Store: End");
+
+    if (running.home == true) {
+        closeHomePage();
+        running.home = false;
+
+    } else if (running.game == true) {
+        endGame();
+        running.game = false;
+        document.getElementById('startEndButton').innerHTML = '<div onclick="startGame()"><p>Start Game</p></div>';
+    } else if (running.settings == true) {
+        closeSettings();
+        running.settings = false;
+        document.getElementById('settingsButton').innerHTML = '<div onclick="openSettings()"><p>Settings</p></div>';
+    }
+
     closeNav();
 }
 
 function closeStore() {
+
+    running.store = false;
+
+    console.log("Close Store: Start");
+
     document.getElementById('store').style.display = "none";
 
-    document.getElementById('storeButton').innerHTML = '<div onclick="openStore()"><p>Store</p></div>';
+    if (running.settings == false && running.home == false && running.game == false) {
+        openHomePage();
+        running.home = true;
+        closeNav();
+        document.getElementById('storeButton').innerHTML = ' <div class="navLinks" onclick="openStore()"><p>Store</p></div>';
+    }
 
-    document.getElementById('explHeadline').style.display = "block";
-    document.getElementById('WebsideExplaination').style.display = "block";
-    document.getElementById('websiteExplText').style.display = "block";
-    document.getElementById('mark').style.display = "block";
-
-
-    closeNav();
+    console.log("Close Store: End");
 }
 
 /* Shop */
@@ -283,7 +373,9 @@ function closeStore() {
 changeItems();
 
 function changeItems() {
-    console.log("Change Items");
+
+    console.log("Change Items: Start");
+
     let player = ['both', 'player1', 'player2'];
     let playerItems = [document.getElementById('StandardItems'), document.getElementById('ItemsPlayerOne'), document.getElementById('ItemsPlayerTwo')];
 
@@ -309,14 +401,20 @@ function changeItems() {
         console.log("Player 2");
     }
 
+    console.log("Change Items: End");
 
 }
 
 /* Buy Items */
 
 function buyCharacter(player, character, cost, characterNum) {
+
+
+    console.log("Buy Character: Start");
+
     if (player === 'player1') {
-        if (player1.score >= cost) {
+        if (player1.score >= cost && player1.items['character' + characterNum] == false) {
+            player1.items['character' + characterNum] = true;
             player1.character = character;
             player1.score -= cost;
             document.getElementById("player1Score").innerHTML = player1.score;
@@ -325,19 +423,246 @@ function buyCharacter(player, character, cost, characterNum) {
             document.getElementById('character' + characterNum).style.filter = "grayscale(0%)";
         }
     } else if (player === 'player2') {
-        if (player2.score >= cost) {
+        if (player2.score >= cost && player2.items['character' + characterNum] == false) {
+            player2.items['character' + characterNum] = true;
             player2.character = character;
             player2.score -= cost;
             document.getElementById("player2Score").innerHTML = player2.score;
-            document.getElementById("scoreOfActivePlayer").innerHTML = player2.score;
+            document.getElementById("scoreOfActivePlayer").innerHTML = '<p>Player Two score is <mark>' + player2.score + '</mark>!</p>';
             document.getElementById('schloss' + (18 + characterNum)).style.display = "none";
             document.getElementById('character' + (characterNum + 3)).style.filter = "grayscale(0%)";
         }
-    } else if (player === 'both') {
-        if (counter >= cost) {
-            console.log("Counter: " + counter);
-            counter -= cost;
-            
+    }
+
+    console.log("Buy Character: End");
+}
+
+function buyAudio(player, audio, cost, audioNum) {
+
+    console.log("Buy Audio: Start");
+
+    if (player === 'player1') {
+        if (player1.score >= cost && player1.items['audio' + audioNum] == false) {
+            player1.items['audio' + audioNum] = true;
+            player1.audio = new Audio(audio);
+            player1.audio.volume = volume;
+            player1.score -= cost;
+            document.getElementById("player1Score").innerHTML = player1.score;
+            document.getElementById('scoreOfActivePlayer').innerHTML = '<p>Player One score is <mark>' + player1.score + '</mark>!</p>';
+            document.querySelector('#audio' + audioNum).classList.remove('audio');
         }
-    }    
+    } else if (player === 'player2') {
+        if (player2.score >= cost && player2.items['audio' + audioNum] == false) {
+            player2.items['audio' + audioNum] = true;
+            player2.audio = new Audio(audio);
+            player2.audio.volume = volume
+            player2.score -= cost;
+            document.getElementById("player2Score").innerHTML = player2.score;
+            document.getElementById("scoreOfActivePlayer").innerHTML = '<p>Player Two score is <mark>' + player2.score + '</mark>!</p>';
+            document.querySelector('#audio' + (audioNum + 3)).classList.remove('audio');
+        }
+    }
+
+
+    console.log("Buy Audio: End");
+}
+
+function buyBackground(src, cost, backgroundNum) {
+
+    console.log("Buy Background: Start");
+
+    if (counter >= cost && bothItems['background' + backgroundNum] == false) {
+        bothItems['background' + backgroundNum] = true;
+        counter -= cost;
+        document.getElementById('scoreOfActivePlayer').innerHTML = '<p>Your shared score is <mark>' + counter + '</mark>!</p>';
+        document.getElementById('schloss' + backgroundNum).style.display = "none";
+        document.getElementById('Background' + backgroundNum).style.filter = "grayscale(0%)";
+
+        console.log('background' + backgroundNum);
+
+        loadBackground(src);
+    }
+
+    console.log("Buy Background: End");
+
+}
+
+function loadBackground(src) {
+    console.log("Load Background: Start");
+
+    document.body.style.backgroundImage = "url(" + src + ")";
+
+    console.log("Load Background: End");
+}
+
+
+
+
+// Volume
+
+function muteVolume() {
+
+    console.log("Mute Volume: Start");
+    volume = 0;
+    player1.audio.volume = volume;
+    player2.audio.volume = volume;
+
+    rangeInput.value = 0;
+
+    document.getElementById('muteVolume').style.display = "none";
+    document.getElementById('unmuteVolume').style.display = "block";
+
+    console.log("Mute Volume: End");
+}
+
+function unmuteVolume() {
+
+    console.log("Unmute Volume: Start");
+    volume = 0.1;
+    player1.audio.volume = volume;
+    player2.audio.volume = volume;
+
+    rangeInput.value = 10;
+
+    document.getElementById('muteVolume').style.display = "block";
+    document.getElementById('unmuteVolume').style.display = "none";
+
+    console.log("Unmute Volume: End");
+}
+
+function setVolume() {
+
+    console.log("Set Volume: Start");
+    player1.audio.volume = volume;
+    player2.audio.volume = volume;
+
+
+
+    console.log("Set Volume: End");
+}
+
+let rangeInput = document.getElementById("myRange");
+
+rangeInput.addEventListener("input", function () {
+    let value = rangeInput.value;
+
+    volume = value / 100;
+
+    player1.audio.volume = volume;
+    player2.audio.volume = volume;
+
+    console.log(value);
+
+    if (volume == 0) {
+        document.getElementById('muteVolume').style.display = "none";
+        document.getElementById('unmuteVolume').style.display = "block";
+    }
+    else {
+        document.getElementById('muteVolume').style.display = "block";
+        document.getElementById('unmuteVolume').style.display = "none";
+    }
+
+});
+
+
+// Settings
+
+
+function openSettings() {
+
+    running.settings = true;
+
+    console.log("Open Settings: Start");
+
+    document.getElementById('settingsPage').style.display = "block";
+    document.getElementById('settingsButton').innerHTML = '<div onclick="closeSettings()"><p>Settings</p></div>';
+
+    document.getElementById('WebsideExplaination').style.display = "none";
+    document.getElementById('explHeadline').style.display = "none";
+    document.getElementById('websiteExplText').style.display = "none";
+
+
+
+    if (running.home == true) {
+        closeHomePage();
+        running.home = false;
+    } else if (running.game == true) {
+        endGame();
+        running.game = false;
+        document.getElementById('startEndButton').innerHTML = '<div onclick="startGame()"><p>Start Game</p></div>';
+    } else if (running.store == true) {
+        closeStore();
+        running.store = false;
+        document.getElementById('storeButton').innerHTML = ' <div class="navLinks" onclick="openStore()"><p>Store</p></div>';
+    }
+
+
+    closeNav();
+    console.log("Open Settings: End");
+
+}
+
+function closeSettings() {
+
+    running.settings = false;
+
+    console.log("Close Settings: Start");
+    document.getElementById('settingsPage').style.display = "none";
+
+    console.log("Close Settings: End");
+
+    if (running.store == false && running.game == false && running.home == false) {
+        openHomePage();
+        running.home = true;
+        closeNav();
+        document.getElementById('settingsButton').innerHTML = ' <div class="navLinks" onclick="openSettings()"><p>Settings</p></div>';
+    }
+}
+
+
+/*      document.getElementById('WebsideExplaination').style.display = "block";
+        document.getElementById('explHeadline').style.display = "block";
+        document.getElementById('websiteExplText').style.display = "block";
+*/
+
+
+function openHomePage() {
+
+    running.home = true;
+
+    console.log("Open Home Page: Start");
+
+    document.getElementById('WebsideExplaination').style.display = "block";
+    document.getElementById('explHeadline').style.display = "block";
+    document.getElementById('websiteExplText').style.display = "block";
+
+    if (running.game == true) {
+        endGame();
+        running.game = false;
+        document.getElementById('startEndButton').innerHTML = '<div onclick="startGame()"><p>Start Game</p></div>';
+    } else if (running.store == true) {
+        closeStore();
+        running.store = false;
+        document.getElementById('storeButton').innerHTML = ' <div class="navLinks" onclick="openStore()"><p>Store</p></div>';
+    } else if (running.settings == true) {
+        closeSettings();
+        running.settings = false;
+        document.getElementById('settingsButton').innerHTML = ' <div class="navLinks" onclick="openSettings()"><p>Settings</p></div>';
+    }
+
+    console.log("Open Home Page: End");
+}
+
+function closeHomePage() {
+
+    console.log("Close Home Page: Start");
+
+    running.home = false;
+
+    document.getElementById('WebsideExplaination').style.display = "none";
+    document.getElementById('explHeadline').style.display = "none";
+    document.getElementById('websiteExplText').style.display = "none";
+
+
+    console.log("Close Home Page: End");
 }
