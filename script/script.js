@@ -1,6 +1,6 @@
 //  Author:  Payreder Tobias
 //  Start-Date:  18/10/2024
-//  Last-Modified-Date:  09/11/2024
+//  Last-Modified-Date:  13/11/2024
 
 
 // Tic Tac Toe game
@@ -22,13 +22,21 @@ let player1 = {
     color: "black",
     weight: 20,
     score: 200,
-    character: '../image/shop/PlayerOne/Character/CharacterStandart.png',
+    character: './image/shop/PlayerOne/Character/CharacterStandart.png',
     audio: '',
-    items: {
+    characters: {
         character0: true,
         character1: false,
         character2: false,
-        character3: false,
+        character3: false
+    },
+    characterSrc: [
+        './image/shop/PlayerOne/Character/CharacterStandart.png',
+        './image/shop/PlayerOne/Character/CharacterOne.png',
+        './image/shop/PlayerOne/Character/CharacterTwo.png',
+        './image/shop/PlayerOne/Character/CharacterThree.png'
+    ],
+    audios: {
         audio0: true,
         audio1: false,
         audio2: false,
@@ -45,13 +53,21 @@ let player2 = {
     color: "red",
     weight: 40,
     score: 200,
-    character: '../image/shop/PlayerTwo/Character/CharacterStandart.png',
+    character: './image/shop/PlayerTwo/Character/CharacterStandart.png',
     audio: '',
-    items: {
+    characters: {
         character0: true,
         character1: false,
         character2: false,
-        character3: false,
+        character3: false
+    },
+    characterSrc: [
+        './image/shop/PlayerTwo/Character/CharacterStandart.png',
+        './image/shop/PlayerTwo/Character/CharacterOne.png',
+        './image/shop/PlayerTwo/Character/CharacterTwo.png',
+        './image/shop/PlayerTwo/Character/CharacterThree.png'
+    ],
+    audios: {
         audio0: true,
         audio1: false,
         audio2: false,
@@ -70,6 +86,17 @@ let bothItems = {
     background3: false
 }
 
+let backgroundSrc = [
+    `<img onclick="chooseWallpaper('./image/Background/BackgroundOne.png')" class="settingsBackgroundImage settingsImageStyle" id="Background0" src="./image/Background/BackgroundOne.jpg">`,
+    `<img onclick="chooseWallpaper('./image/Background/BackgroundTwo.png')" class="settingsBackgroundImage settingsImageStyle" id="Background1" src="./image/Background/BackgroundTwo.jpg">`,
+    `<img onclick="chooseWallpaper('./image/Background/BackgroundThree.png')" class="settingsBackgroundImage settingsImageStyle" id="Background2" src="./image/Background/BackgroundThree.jpg">`,
+    `<img onclick="chooseWallpaper('./image/Background/BackgroundFour.png')" class="settingsBackgroundImage settingsImageStyle" id="Background3" src="./image/Background/BackgroundFour.jpg">`
+];
+
+let counters = {
+    image: 1
+}
+
 let volume = 0.1;
 
 let gameMatrix = [
@@ -80,10 +107,10 @@ let gameMatrix = [
 
 let counter = 200;
 
-player1.audio = new Audio('../image/shop/PlayerOne/Audio/Attack1-2.mp3');
+player1.audio = new Audio('./image/shop/PlayerOne/Audio/Attack1-2.mp3');
 player1.audio.volume = volume;
 
-player2.audio = new Audio('../image/shop/PlayerTwo/Audio/Attack1-1.mp3');
+player2.audio = new Audio('./image/shop/PlayerTwo/Audio/Attack1-1.mp3');
 player2.audio.volume = volume;
 
 // Nav
@@ -118,7 +145,7 @@ function closeNav() {
         nav.style.animation = "none";
         nav.offsetHeight;
         nav.style.animation = "navigationCloseWhileGame 0.2s ease-in-out forwards";
-    }else {
+    } else {
         nav.style.animation = "none";
         nav.offsetHeight;
         nav.style.animation = "navigationClose 0.2s ease-in-out forwards";
@@ -160,9 +187,9 @@ function startGame() {
 
 
 
-   setTimeout(() => {
-    closeNav();
-   }, 10);
+    setTimeout(() => {
+        closeNav();
+    }, 10);
 }
 
 
@@ -207,7 +234,7 @@ function game(fieldPlayer, row, col) {
             document.getElementById('field' + (row * 3 + col + 1)).classList.remove('animationGameField');
             document.getElementById('field' + (row * 3 + col + 1)).style.cursor = "default";
         } else {
-            player2.audio.play(); 0
+            player2.audio.play(); 
             fieldPlayer.innerHTML = '<img src="' + player2.character + '" alt="Player 2" class="character">';
             gameMatrix[row][col] = player2.weight;
             document.getElementById('field' + (row * 3 + col + 1)).classList.remove('animationGameField');
@@ -413,9 +440,10 @@ function buyCharacter(player, character, cost, characterNum) {
     console.log("Buy Character: Start");
 
     if (player === 'player1') {
-        if (player1.score >= cost && player1.items['character' + characterNum] == false) {
-            player1.items['character' + characterNum] = true;
+        if (player1.score >= cost && player1.characters['character' + characterNum] == false) {
+            player1.characters['character' + characterNum] = true;
             player1.character = character;
+            player1.equippedItems.character = characterNum;
             player1.score -= cost;
             document.getElementById("player1Score").innerHTML = player1.score;
             document.getElementById('scoreOfActivePlayer').innerHTML = '<p>Player One score is <mark>' + player1.score + '</mark>!</p>';
@@ -423,9 +451,10 @@ function buyCharacter(player, character, cost, characterNum) {
             document.getElementById('character' + characterNum).style.filter = "grayscale(0%)";
         }
     } else if (player === 'player2') {
-        if (player2.score >= cost && player2.items['character' + characterNum] == false) {
-            player2.items['character' + characterNum] = true;
+        if (player2.score >= cost && player2.characters['character' + characterNum] == false) {
+            player2.characters['character' + characterNum] = true;
             player2.character = character;
+            player2.equippedItems.character = characterNum;
             player2.score -= cost;
             document.getElementById("player2Score").innerHTML = player2.score;
             document.getElementById("scoreOfActivePlayer").innerHTML = '<p>Player Two score is <mark>' + player2.score + '</mark>!</p>';
@@ -433,6 +462,8 @@ function buyCharacter(player, character, cost, characterNum) {
             document.getElementById('character' + (characterNum + 3)).style.filter = "grayscale(0%)";
         }
     }
+
+    setCharacterInventory();
 
     console.log("Buy Character: End");
 }
@@ -442,8 +473,9 @@ function buyAudio(player, audio, cost, audioNum) {
     console.log("Buy Audio: Start");
 
     if (player === 'player1') {
-        if (player1.score >= cost && player1.items['audio' + audioNum] == false) {
-            player1.items['audio' + audioNum] = true;
+        if (player1.score >= cost && player1.audios['audio' + audioNum] == false) {
+            player1.audios['audio' + audioNum] = true;
+            player1.equippedItems.audio = audioNum;
             player1.audio = new Audio(audio);
             player1.audio.volume = volume;
             player1.score -= cost;
@@ -452,8 +484,9 @@ function buyAudio(player, audio, cost, audioNum) {
             document.querySelector('#audio' + audioNum).classList.remove('audio');
         }
     } else if (player === 'player2') {
-        if (player2.score >= cost && player2.items['audio' + audioNum] == false) {
-            player2.items['audio' + audioNum] = true;
+        if (player2.score >= cost && player2.audios['audio' + audioNum] == false) {
+            player2.audios['audio' + audioNum] = true;
+            player2.equippedItems.audio = audioNum;
             player2.audio = new Audio(audio);
             player2.audio.volume = volume
             player2.score -= cost;
@@ -477,6 +510,8 @@ function buyBackground(src, cost, backgroundNum) {
         document.getElementById('scoreOfActivePlayer').innerHTML = '<p>Your shared score is <mark>' + counter + '</mark>!</p>';
         document.getElementById('schloss' + backgroundNum).style.display = "none";
         document.getElementById('Background' + backgroundNum).style.filter = "grayscale(0%)";
+
+
 
         console.log('background' + backgroundNum);
 
@@ -581,6 +616,26 @@ function openSettings() {
     document.getElementById('explHeadline').style.display = "none";
     document.getElementById('websiteExplText').style.display = "none";
 
+    // Background
+
+    for (let i = 0; i < backgroundSrc.length; i++) {
+        document.getElementById('settingsImages').innerHTML = '';
+        counters.image = 0;
+    }
+
+    for (let i = 0; i < backgroundSrc.length; i++) {
+        if (bothItems['background' + i] == true) {
+            document.getElementById('settingsImages').innerHTML += backgroundSrc[i];
+            counters.image++;
+
+        }
+    }
+
+    if (counters.image % 2 == 1) {
+        document.getElementById('settingsImages').innerHTML += invisibleImage;
+    }
+
+
 
 
     if (running.home == true) {
@@ -617,6 +672,61 @@ function closeSettings() {
         closeNav();
         document.getElementById('settingsButton').innerHTML = ' <div class="navLinks" onclick="openSettings()"><p>Settings</p></div>';
     }
+}
+
+function chooseWallpaper(src) {
+    // document.body.style.backgroundImage = `url(${src})`;
+
+    console.log("Choose Wallpaper: Start");
+
+    console.log(src);
+    loadBackground(src);
+
+    console.log("Choose Wallpaper: End");
+}
+
+
+
+// set Characterinventory
+
+setCharacterInventory();
+
+function setCharacterInventory() {
+
+    document.getElementById('settingsPlayer1').innerHTML = '';
+    document.getElementById('settingsPlayer2').innerHTML = '';
+
+
+    for (let i = 0; i < 4; i++) {
+        if (player1.characters['character' + i] == true) {
+            console.log(player1.characterSrc[i]);
+            document.getElementById('settingsPlayer1').innerHTML += `<img id="characterPl1${i}" onclick="setCharacter(${player1.characterSrc[i]}, 1)" src="${player1.characterSrc[i]}" alt="Player 1" class="character">`;
+            
+            console.log('characterPl1' + player1.equippedItems.character);
+        }
+    }
+
+    for (let i = 0; i < 4; i++) {
+        if (player2.characters['character' + i] == true) {
+            console.log(player2.characterSrc[i]);
+            document.getElementById('settingsPlayer2').innerHTML += `<img id="characterPl2${i}" onclick="setCharacter(${player2.characterSrc[i]}, 2)" src="${player2.characterSrc[i]}" alt="Player 2" class="character">`;
+
+        }
+    }
+}
+
+function setCharacter(character, player) {
+
+    console.log("Set Character: Start");
+
+    if (player == 1) {
+        player1.character = character;
+    } else if (player == 2) {
+        player2.character = character;
+    }
+
+    console.log("Set Character: End");
+
 }
 
 
@@ -666,3 +776,5 @@ function closeHomePage() {
 
     console.log("Close Home Page: End");
 }
+
+let invisibleImage = '<img class="settingsBackgroundImage invisible" src="./image/Background/invisible-png.png" alt="">'

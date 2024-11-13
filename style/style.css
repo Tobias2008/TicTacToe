@@ -337,7 +337,7 @@ option {
     min-height: 500px;
     max-height: 700px;
     background-color: #3122448a;
-    
+
 }
 
 #Background1,
@@ -382,7 +382,7 @@ option {
 
 #item1:hover #Background1,
 #item2:hover #Background2,
-#item3:hover #Background3{
+#item3:hover #Background3 {
     filter: grayscale(0%);
 }
 
@@ -600,6 +600,93 @@ option {
 
 #settingsPage {
     display: none;
+}
+
+#settingsBackground {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 5%;
+    border: #31085a 4px solid;
+    border-radius: 15px;
+    background-color: #3122448a;
+    padding: 2%;
+}
+
+.settingsBackgroundImage {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 15px;
+
+}
+
+.settingsImageStyle {
+    border: 4px #31085a solid;
+    cursor: pointer;
+}
+
+#settingsImages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2%;
+}
+
+#settingsPlayer1,
+#settingsPlayer2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2%;
+    background-color: #3122448a;
+    border-radius: 15px;
+    border: #31085a 3px solid;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#settingsPlayer1 img,
+#settingsPlayer2 img {
+    width: 70%;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#settingsPlayerBoth,
+#Player1Settings {
+    margin-bottom: 10%;
+}
+
+.animateChosenCharacter {
+    animation: chosenCharacter 0.5s 1 alternate ease-in-out forwards;
+}
+
+@keyframes chosenCharacter {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.animateChosenCharacterBack {
+    animation: chosenCharacterBack 0.5s 1 alternate ease-in-out forwards;
+}
+
+@keyframes chosenCharacterBack {
+    0% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 
