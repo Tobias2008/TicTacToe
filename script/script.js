@@ -21,7 +21,7 @@ let player1 = {
     name: "Player 1",
     color: "black",
     weight: 20,
-    score: 200,
+    score: 0,
     character: './image/shop/PlayerOne/Character/CharacterStandart.png',
     audio: '',
     characters: {
@@ -52,7 +52,7 @@ let player2 = {
     name: "Player 2",
     color: "red",
     weight: 40,
-    score: 200,
+    score: 0,
     character: './image/shop/PlayerTwo/Character/CharacterStandart.png',
     audio: '',
     characters: {
